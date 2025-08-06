@@ -1,1 +1,56 @@
+# PSO Optimization of Dual Active Bridge (DAB) Converter using MATLAB & Simulink
 
+This project uses **Particle Swarm Optimization (PSO)** to optimize the switching parameters of a **Dual Active Bridge (DAB)** converter modeled in Simulink. 
+The optimization aims to minimize a custom cost function that combines **power loss**, **RMS current**, and **peak current**—thereby improving efficiency.
+
+---
+
+## Repository Contents
+├── DAB_Model.slx # Simulink model of the DAB converter
+├── DAB_Objective.m # MATLAB script for objective function
+├── run_pso.m # MATLAB script that runs the PSO
+
+---
+
+## Optimization Objective
+
+The PSO algorithm searches for the optimal values of:
+
+- `α` (alpha): phase shift angle
+- `φ₁` (phi1): phase of primary bridge
+- `φ₂` (phi2): phase of secondary bridge
+
+The **objective function** (`DAB_Objective`) simulates the model and returns:
+
+Cost = 0.6 * P_loss + 0.3 * Irms + 0.1 * IPeak
+Where:
+- `P_loss`: Total power loss (W)
+- `Irms`: RMS input current (A)
+- `IPeak`: Peak input current (A)
+
+These values are retrieved from Simulink's `logsout` signal logging.
+
+---
+
+## PSO Configuration
+
+| Parameter | Meaning                           | Value               |
+|-----------|-----------------------------------|---------------------|
+| `nVar`    | Number of decision variables      | 3 (`α`, `φ₁`, `φ₂`) |
+| `nPop`    | Number of particles               | 30                  |
+| `MaxIt`   | Maximum iterations                | 50                  |
+| `w`       | Inertia weight                    | 0.7                 |
+| `c1`      | Cognitive (personal best) factor  | 1.5                 |
+| `c2`      | Social (global best) factor       | 1.5                 |
+
+All three variables are bounded between **0** and **π (3.1416)**.
+
+---
+
+### Instructions:
+
+1. Open MATLAB and set the working directory to this repo.
+2. Open `DAB_Model.slx` and verify:
+   - Simulation runs without errors for valid `alpha`, `phi1`, `phi2`
+   - Signal logging is enabled
+3. Run the PSO script
