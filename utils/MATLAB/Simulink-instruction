@@ -1,4 +1,4 @@
-# 🔌 Wireless Power Transfer (WPT) System Dataset Generator using MATLAB & Simulink
+# Wireless Power Transfer (WPT) System Dataset Generator using MATLAB & Simulink
 
 This project automates the generation of a dataset for a wireless power transfer (WPT) system using MATLAB and Simulink. By sweeping input voltage (`Vin`) and load resistance (`RL`), it simulates multiple operating conditions and logs key performance metrics.
 
