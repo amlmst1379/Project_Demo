@@ -1,1 +1,50 @@
+# 🔌 Wireless Power Transfer (WPT) System Dataset Generator using MATLAB & Simulink
 
+This project automates the generation of a dataset for a wireless power transfer (WPT) system using MATLAB and Simulink. By sweeping input voltage (`Vin`) and load resistance (`RL`), it simulates multiple operating conditions and logs key performance metrics.
+
+---
+
+## Files Included
+├── WPTsystemwithvariations.slx # Simulink model of the WPT system
+├── amirtest2.m # MATLAB script to perform parameter sweep
+├── combined_output.csv # Output dataset generated from simulations
+
+---
+
+## Purpose
+
+The script performs parameter sweeps to:
+- Analyze system behavior under varying `Vin` and `RL`
+- Log RMS values of electrical quantities
+- Compute input/output power and system efficiency
+- Export results as a structured `.csv` file
+
+---
+
+## Parameter Sweep Details
+
+- **Input Voltage (`Vin`)**: Sweeps from **750V to 800V** (step size: 1V)
+- **Load Resistance (`RL`)**: Sweeps from **15Ω to 30Ω** (15 linear steps)
+- **Total Simulations**: 51 × 15 = **765 runs**
+- **Simulation Time**: 0.0 to 0.01 seconds for each run
+- **Execution Method**: Parallel using `parsim()` (8 workers)
+
+---
+
+## Logged Outputs
+
+The following RMS values are logged and analyzed:
+
+| Variable     | Description                                |
+|--------------|--------------------------------------------|
+| `Vin`        | Input voltage (V)                          |
+| `RL`         | Load resistance (Ohm)                      |
+| `Iin`        | Input current (A, RMS)                     |
+| `Pin`        | Input power = Vin × Iin (W)                |
+| `Vout`       | Output voltage (V, RMS)                    |
+| `Iout`       | Output current (A, RMS)                    |
+| `Pout`       | Output power = Vout × Iout (W)             |
+| `Eff`        | Efficiency = Pout / Pin                    |
+| `Is1`–`Is8`  | RMS currents through 8 MOSFET switches     |
+
+All results are stored in `combined_output.csv`.
